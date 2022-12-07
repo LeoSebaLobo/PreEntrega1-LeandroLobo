@@ -1,31 +1,22 @@
 import Proptypes from 'prop-types';
+import { NavLink } from "react-router-dom";
 
 import styles from './styles/NavBar.module.scss';
 
-
-import CartWidget from '../CartWidget/CartWidget';
-import Search from '../Search/Search';
-import User from '../Icons/User';
-
-const NavBar = ({menus, children}) => {
+const NavBar = ({categories}) => {
 	return (
 		<>
-			<div className= {styles.navbar}>
-				
-				<Search />
-				<User />
-				<CartWidget />
-			</div>	
-			<div className= {styles.navbarmenus}>
-				{ menus.map((menu)=> { return <a href="/#">{menu}</a> }) }	
-			</div>	
+			<nav className= {styles.navbar}>{ 
+				categories.map((category) => { 
+					return ( <NavLink key={category.id}  to={category.route} > {category.name} </NavLink> );
+				})}
+			</nav>	
 		</>
 	)
 }
 
 NavBar.proptype = {
 	menus: Proptypes.array.isRequired,
-	children: Proptypes.element
 }
 
 export default NavBar;
